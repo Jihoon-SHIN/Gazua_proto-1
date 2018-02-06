@@ -6,13 +6,13 @@ public class BeatManager : MonoBehaviour {
 	public AudioSource bgsound;
 	public AudioSource beatsound;
 
-	float bpm = 140;
+
+	float bpm = 130;
 	int clapperbeat = 4;
 
-	float bgtime;
+	private static float bgtime;
 	int bgbeat;
 	int prevbeat = -1;
-
     // Use this for initialization
     void Start () {
 		
@@ -20,26 +20,12 @@ public class BeatManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/*
 		if(Input.GetKeyDown(KeyCode.Space)){
-			bgsound.Stop();
-			bgsound.Play();
-		}
-		 */
-		// Debug.Log(bgsound.time);
-		bgtime = bgsound.time;
-        bgbeat = (int)(bgtime * bpm /(60*clapperbeat));
-
-		if(bgbeat > prevbeat){
 			beatsound.Play();
-			prevbeat = bgbeat;
-			//action_beat();
+			TimeCheck.setbeat(bgsound.time);
+
 		}
     }
-	void action_beat(){
-		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		cube.AddComponent<Rigidbody>();
-		cube.transform.position = new Vector3(0, 0, 0);
-		cube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-	}
+
+
 }

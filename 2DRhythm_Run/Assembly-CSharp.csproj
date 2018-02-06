@@ -51,14 +51,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\BarFollow.cs" />
      <Compile Include="Assets\Script\BeatManager.cs" />
      <Compile Include="Assets\Script\BoardManager.cs" />
+     <Compile Include="Assets\Script\BoxFollow.cs" />
      <Compile Include="Assets\Script\CameraFollow.cs" />
+     <Compile Include="Assets\Script\CommandManager.cs" />
      <Compile Include="Assets\Script\Enemy.cs" />
      <Compile Include="Assets\Script\GameManager.cs" />
      <Compile Include="Assets\Script\Loader.cs" />
      <Compile Include="Assets\Script\MovingObject.cs" />
      <Compile Include="Assets\Script\Player.cs" />
+     <Compile Include="Assets\Script\TimeCheck.cs" />
      <Compile Include="Assets\Script\Wall.cs" />
  <Reference Include="UnityEngine.UIAutomation">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
