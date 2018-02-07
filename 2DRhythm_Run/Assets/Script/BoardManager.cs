@@ -92,7 +92,7 @@ public class BoardManager : MonoBehaviour {
 		BoardSetup();
 		initialiseList();
 		LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
-		LayoutObjectAtRandom(enemyTiles, 1, 1);
+		LayoutObjectAtRandom(enemyTiles, 10, 10);
 		LayoutObjectAtRandom(InnerWallTiles, 2, 4);
 	}
 }

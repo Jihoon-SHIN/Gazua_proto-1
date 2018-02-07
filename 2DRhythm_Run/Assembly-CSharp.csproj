@@ -55,6 +55,7 @@
      <Compile Include="Assets\Script\BeatManager.cs" />
      <Compile Include="Assets\Script\BoardManager.cs" />
      <Compile Include="Assets\Script\BoxFollow.cs" />
+     <Compile Include="Assets\Script\Bullet.cs" />
      <Compile Include="Assets\Script\CameraFollow.cs" />
      <Compile Include="Assets\Script\CommandManager.cs" />
      <Compile Include="Assets\Script\Enemy.cs" />

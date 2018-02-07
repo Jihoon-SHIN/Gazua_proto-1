@@ -13,10 +13,23 @@ public class BarFollow : MonoBehaviour {
     public float bulletSpeed = 5;
     public float noteTimer;
 	public float noteInterval = 0;
+
+	public float rhythmTimer = 0;
+	public float rhythmInterval = 2f;
+
 	public GameObject note;
 	public AudioSource BGM;
+
+	public List<int> command = null;
+	public bool commandReady = false;
+
+	public static BarFollow instance = null;
 	// Use this for initialization
 	void Start () {
+		if(instance == null)
+		{
+			instance = this;
+		}
 		target = GameObject.FindGameObjectWithTag("Player");
 		beatManager = GetComponent<BeatManager>();
 		BGM = GameObject.Find("CS496BGM").GetComponent<AudioSource>();
@@ -28,7 +41,7 @@ public class BarFollow : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			makeNote();
-			Debug.Log(TimeCheck.getbeat());
+			command.Add(TimeCheck.getbeat());
 		}
 
 		//If position X of bar is larger than -2.3, destory the clone 
@@ -37,6 +50,10 @@ public class BarFollow : MonoBehaviour {
 			foreach(var clone in clones)
 			{
 				Destroy(clone);
+			}
+			if(command.Count != 0)
+			{	
+				commandReady = true;
 			}
 		}
 	}

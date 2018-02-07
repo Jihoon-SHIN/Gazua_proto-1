@@ -16,6 +16,11 @@ public class Player : MovingObject {
 	private int food;
 	private int horizontal = 0;
 	private int vertical = 0;
+
+	private float bulletTimer = 0;
+	private float shootInterval = 0;
+
+	public GameObject bullet;
 	// Use this for initialization
 	protected override void Start () {
 		animator = GetComponent<Animator>();
@@ -31,22 +36,52 @@ public class Player : MovingObject {
 	
 	// Update is called once per frame
 	void Update () {
+		/*
 		if(!GameManager.instance.playersTurn){
 			 return;
 		}
-		horizontal = (int)(Input.GetAxisRaw("Horizontal"));
-		vertical = (int)(Input.GetAxisRaw("Vertical"));
+		 */
+		if(BarFollow.instance.commandReady)
+		{
+			switch(CommandManager.instance.commandCheck(BarFollow.instance.command))
+			{
+				case "front":
+					horizontal = 0;
+					vertical = 1;
+					break;
+				case "frontLeft":
+					horizontal = -1;
+					vertical = 1;
+					break;
+				case "frontRight":
+					horizontal = 1;
+					vertical = 1;
+					break;
+				case "attackFront":
+					horizontal = 0;
+					vertical = 0;
+					bulletAttack();
+					break;
+				case "NoCommand":
+					horizontal = 0;
+					vertical = 0;
+					break;
+				default:
+					horizontal = 0;
+					vertical = 0;
+					break;
+			}
+			if(horizontal != 0 || vertical !=0)
+				AttemptMove<Wall>(horizontal, vertical);
+			BarFollow.instance.command.Clear();
+			BarFollow.instance.commandReady = false;
+		}
 
-		if(horizontal != 0)
-			vertical =0;
-		
-		if(horizontal != 0 || vertical != 0)
-			AttemptMove<Wall>(horizontal, vertical);
 	}
 
 	protected override void AttemptMove<T>(int xDir, int yDir)
 	{
-		food--;
+		food -= 10;
 		foodText.text = "Food: " + food;
 		base.AttemptMove<T> (xDir, yDir);
 		//RaycastHit2D hit;
@@ -95,5 +130,17 @@ public class Player : MovingObject {
 			GameManager.instance.GameOver();
 		}
 
+	}
+	
+	public void bulletAttack()
+	{
+		bulletTimer += Time.deltaTime;
+		if(bulletTimer >= shootInterval)
+		{
+			GameObject bulletClone;
+			bulletClone = Instantiate(bullet, transform.position, Quaternion.identity) as GameObject;
+			bulletClone.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 3f);
+			bulletTimer =0;
+		}
 	}
 }
